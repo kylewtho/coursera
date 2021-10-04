@@ -8,9 +8,9 @@ function upDate(previewPic){
     2) Change the text  of the div with the id = "image" 
     to the alt text of the preview image 
     */
-  oldText = document.getElementById("image").innerHTML;
-  document.getElementById("image").innerHTML = previewPic.alt;
-  document.getElementById("image").style.backgroundImage = "url(" + previewPic.src + ")";
+  oldText = document.getElementById("image").innerHTML; //save the original text as oldText
+  document.getElementById("image").innerHTML = previewPic.alt; //replace the text
+  document.getElementById("image").style.backgroundImage = "url(" + previewPic.src + ")"; //replace the background image
 	}
 
 	function unDo(){
@@ -21,6 +21,6 @@ function upDate(previewPic){
     2) Change the text  of the div with the id = "image" 
     back to the original text.  You can use the html code to see what that original text was
     */
-  document.getElementById("image").innerHTML = oldText;
-  document.getElementById("image").style.backgroundImage = "";
+  document.getElementById("image").innerHTML = oldText; //restore the text
+  document.getElementById("image").style.backgroundImage = ""; //restore the background image
 	}
