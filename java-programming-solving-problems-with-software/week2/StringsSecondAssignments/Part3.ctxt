@@ -1,6 +1,6 @@
 #BlueJ class context
-comment0.target=Part1
-comment0.text=\n\ Part\ 1\:\ Finding\ many\ Genes\n\ \n\ @author\ Kyle\ H.\n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment0.target=Part3
+comment0.text=\n\ Part\ 3\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
 comment1.params=dna\ startIndex\ stopCodon
 comment1.target=int\ findStopCodon(java.lang.String,\ int,\ java.lang.String)
 comment2.params=
@@ -11,4 +11,8 @@ comment4.params=
 comment4.target=void\ testFindGene()
 comment5.params=dna
 comment5.target=void\ printAllGenes(java.lang.String)
-numComments=6
+comment6.params=dna
+comment6.target=int\ countGenes(java.lang.String)
+comment7.params=
+comment7.target=void\ testCountGenes()
+numComments=8

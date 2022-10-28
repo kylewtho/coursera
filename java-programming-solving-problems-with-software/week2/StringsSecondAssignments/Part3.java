@@ -1,11 +1,11 @@
 
 /**
- * Part 1: Finding many Genes
+ * Part 3
  * 
- * @author Kyle H.
+ * @author (your name) 
  * @version (a version number or a date)
  */
-public class Part1 {
+public class Part3 {
     public int findStopCodon(String dna, int startIndex, String stopCodon) {
         int dnaLength = dna.length();
         int currIndex = dna.indexOf(stopCodon, startIndex+3);
@@ -29,7 +29,7 @@ public class Part1 {
         int stopIndexClosest = dna.length();
         // if there is no start codon, returns an empty string
         if (startIndex == -1) {
-            return "NO START CODON FOUND";
+            return "";
         }
         int taaIndex = findStopCodon(dna, startIndex, "TAA");
         stopIndexClosest = Math.min(stopIndexClosest, taaIndex);
@@ -38,7 +38,7 @@ public class Part1 {
         int atgIndex = findStopCodon(dna, startIndex, "ATG");
         stopIndexClosest = Math.min(stopIndexClosest, atgIndex);
         if (stopIndexClosest == dna.length()) {
-            return "NO STOP CODON FOUND";
+            return "";
         } else {
             return dna.substring(startIndex, stopIndexClosest+3);
         }
@@ -68,11 +68,30 @@ public class Part1 {
         int startIndex = 0;
         while (true) {
             String gene = findGene(dna, startIndex);
-            System.out.println("Gene: " + gene);
-        if (findGene(dna, startIndex) == "") {
-            break;
+            if (gene.isEmpty()) {
+                break;
+            }
+            System.out.println(gene);
+            startIndex = dna.indexOf(gene, startIndex) + gene.length();
         }
-        startIndex = dna.indexOf(gene, startIndex) + gene.length();
+    }
+    public int countGenes(String dna) {
+        int startIndex = 0;
+        int count = 0;
+        while (true) {
+            String gene = findGene(dna, startIndex);
+            if (gene.isEmpty()) {
+                break;
+            }
+            count++;
+            startIndex = dna.indexOf(dna, startIndex) + gene.length();
         }
+        return count;
+    }
+    public void testCountGenes() {
+        String dna = "ATGTAAGATGCCCTAGT";
+        String result = String.format("%s, gene count: %d", dna, countGenes(dna));
+        System.out.println(result);
+        printAllGenes(dna);
     }
 }
