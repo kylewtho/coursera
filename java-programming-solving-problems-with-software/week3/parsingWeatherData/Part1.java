@@ -104,10 +104,55 @@ public class Part1 {
     public void testLowestHumidityInFile() {
         FileResource fr = new FileResource();
         CSVParser parser = fr.getCSVParser();
-        CSVRecord record = coldestHourInFile(parser);
+        CSVRecord record = lowestHumidityInFile(parser);
         System.out.println("Lowest Humidity was " + record.get("Humidity") + " at " + record.get("DateUTC"));
     }
     
     // 4
+    public CSVRecord lowestHumidityInManyFiles() {
+        CSVRecord lowestSoFar = null;
+        double currHumid = 0.0;
+        double lowestHumid = 0.0;
+        
+        DirectoryResource dr = new DirectoryResource();
+        for (File f : dr.selectedFiles()) {
+            FileResource fr = new FileResource(f);
+            CSVRecord record = lowestHumidityInFile(fr.getCSVParser());
+            if (lowestSoFar == null) {
+                lowestSoFar = record; 
+                lowestHumid = Double.parseDouble(record.get("Humidity"));
+            }
+            currHumid = Double.parseDouble(record.get("Humidity"));
+            lowestHumid = Double.parseDouble(lowestSoFar.get("Humidity"));
+            if (currHumid != -9999 && currHumid < lowestHumid) {
+                lowestSoFar = record;
+            }
+        }  
+        
+        return lowestSoFar;        
+    }
+    public void testLowestHumidityInManyFiles() {
+        CSVRecord record = lowestHumidityInManyFiles();
+        System.out.println("Lowest Humidity was " + record.get("Humidity") + " at " + record.get("DateUTC"));
+    }
     
+    // 5
+    public double averageTemperatureInFile(CSVParser parser) {
+        double avgTemp = 0.0;
+        double count = 0.0;
+        double sum = 0.0;
+        
+        for (CSVRecord record : parser) {
+            sum += Double.parseDouble(record.get("TemperatureF"));
+            count ++;
+        }
+        avgTemp = sum / count;
+        return avgTemp;
+    }
+    public void testAverageTemperatureInFile() {
+        FileResource fr = new FileResource();
+        CSVParser parser = fr.getCSVParser();
+        double avgTemp = averageTemperatureInFile(parser);
+        System.out.println("Average temperature in file is " + avgTemp);
+    }
 }
