@@ -139,7 +139,7 @@ public class Part1 {
     // 5
     public double averageTemperatureInFile(CSVParser parser) {
         double avgTemp = 0.0;
-        double count = 0.0;
+        int count = 0;
         double sum = 0.0;
         
         for (CSVRecord record : parser) {
@@ -154,5 +154,32 @@ public class Part1 {
         CSVParser parser = fr.getCSVParser();
         double avgTemp = averageTemperatureInFile(parser);
         System.out.println("Average temperature in file is " + avgTemp);
+    }
+    
+    // 6
+    public double averageTemperatureWithHighHumidityInFile(CSVParser parser, int value) {
+        double avgTemp = 0.0;
+        int count = 0;
+        double sum = 0.0;
+        
+        for (CSVRecord record : parser) {
+            if (Double.parseDouble(record.get("Humidity")) >= value) {
+                sum += Double.parseDouble(record.get("TemperatureF"));
+                count ++;
+            }
+        }
+        avgTemp = sum / count;
+        return avgTemp;
+    }
+    public void testAverageTemperatureWithHighHumidityInFile() {
+        FileResource fr = new FileResource();
+        CSVParser parser = fr.getCSVParser();
+        double avgTemp = averageTemperatureWithHighHumidityInFile(parser, 80);
+        System.out.println("Average Temp when high Humidity is " + avgTemp);
+    }
+    
+    // test
+    public void quiz3() {
+
     }
 }
